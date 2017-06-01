@@ -16,8 +16,10 @@ namespace K_nearest_neighbors
         public List<Point> testdatasets = new List<Point>();
 
         public File_manager()
-        {
-            using (StreamReader reader = new StreamReader("test.txt"))
+        { }
+        public void readDataSet(String filename, List<Point> list)
+        { 
+            using (StreamReader reader = new StreamReader(filename))
             {
                 string line = null;
                 while (null != (line = reader.ReadLine()))
@@ -26,20 +28,20 @@ namespace K_nearest_neighbors
                     String[] strArray = line.Split(';');
                     String label = null;
                     double[] parameters = new double[4];
-                    for (int i = 0; i < 4; i++)
+                    for (int i=0; i<4; i++)
                     {
                         parameters[i] = Double.Parse(strArray[i]);
                         label = strArray.Last();
                     }
-
+                  
                     Point p = new Point(parameters, label);
-                    all.Add(p);
+                    list.Add(p);
 
                 }
 
 
 
-                foreach (Point p in all)
+                foreach (Point p in list)
                 {
                     if (p.Label.Equals("Iris-setosa"))
                     {
